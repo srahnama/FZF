@@ -16,23 +16,29 @@ import java.io.OutputStream;
 */
 
 public class DBHelper extends SQLiteOpenHelper {
-static String DB_PATH = "data/data/ir.srahnama.sherdoon.sherdoon/databases/";
+static String DB_PATH = "data/data/ir.srahnama.a504.a504/databases/";
 
 private final Context mContext;
 
 // Table Name
-public static final String TABLE_NAME = "poems";
+public static final String TABLE_NAME = "words";
 
 // Table columns
-public static final String _ID = "id";
-public static final String _TITLE = "title";
-public static final String _TEXT = "text";
-public static final String _READ = "readcount";
-public static final String _FAVORITE = "favorite";
+	public static final String _ID = "id";
+	public static final String _ENword = "title";
+	public static final String _FAword = "text";
+	public static final String _READ = "read";
+	public static final String _FAVORITE = "favorite";
+	public static final String _CODING = "coding";
+	public static final String _SYNON= "synon";
+	public static final String _PRONUN= "pronun";
+	public static final String _EXAMPLE = "example";
+	public static final String _EXMEAN = "exmean";
+
 //public static final String TODO_SUBJECT = "subject";
 //public static final String TODO_DESC = "description";
 // Database Information
-static final String DB_NAME = "love2";
+static final String DB_NAME = "504";
 
 // database version
 static final int DB_VERSION = 1;

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by mrs on 10/6/16.
@@ -23,6 +26,7 @@ public class SQLController {
     public SQLController open() throws SQLException {
         dbHelper = new DBHelper(ourcontext);
         dbHelper.createDB();
+       // Log.d(TAG, "open: create db");
         database = dbHelper.getWritableDatabase();
         return this;
 
@@ -33,7 +37,7 @@ public class SQLController {
     }
 
     public Cursor fetch() {
-        String[] columns = new String[] { DBHelper._ID,DBHelper._TEXT, DBHelper._FAVORITE, DBHelper._TEXT };
+        String[] columns = new String[] { DBHelper._ID,DBHelper._ENword, DBHelper._FAVORITE,DBHelper._SYNON,DBHelper._PRONUN, DBHelper._FAword,DBHelper._CODING,DBHelper._EXAMPLE,DBHelper._EXMEAN };
         Cursor cursor = database.query(DBHelper.TABLE_NAME, columns, null,
                 null, null, null, null);
         if (cursor != null) {
