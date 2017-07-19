@@ -25,8 +25,10 @@ public class SQLController {
     }
     public SQLController open() throws SQLException {
         dbHelper = new DBHelper(ourcontext);
-        dbHelper.createDB();
-       // Log.d(TAG, "open: create db");
+        Log.d(TAG, "open: create db");
+        dbHelper.checkDB();
+
+
         database = dbHelper.getWritableDatabase();
         return this;
 

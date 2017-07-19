@@ -5,11 +5,14 @@ package ir.srahnama.a504.a504;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import static android.content.ContentValues.TAG;
 
 /**
 * Created by mrs on 10/6/16.
@@ -47,15 +50,19 @@ public DBHelper(Context context){
 	super(context, DB_NAME, null, DB_VERSION);
 	this.mContext = context;
 }
+
 public void createDB(){
 	boolean dbExist = checkDB();
+	Log.d(TAG, "open1: create db");
 	if (dbExist) {
-
+		Log.d(TAG, "check1 : notcopydb");
 	} else {
 		this.getReadableDatabase();
 
 		try {
+			Log.d(TAG, "check1 : copydb");
 			copyDB();
+
 		} catch (Exception e) {
 			throw new Error("Error copying DB");
 
@@ -68,6 +75,7 @@ public void createDataBase() throws IOException {
 	if (!mDataBaseExist) {
 		this.getReadableDatabase();
 		try {
+
 			copyDB();
 		} catch (IOException mIOException) {
 			mIOException.printStackTrace();
@@ -77,7 +85,7 @@ public void createDataBase() throws IOException {
 		}
 	}
 }
-private boolean checkDB() {
+public boolean checkDB() {
 	SQLiteDatabase check = null;
 	try {
 		String dbPath = DB_PATH+DB_NAME;
@@ -88,7 +96,10 @@ private boolean checkDB() {
 	if (check!=null) {
 		check.close();
 	}
-
+	if(check!=null)
+		Log.d(TAG, "check1 : true");
+	else
+		Log.d(TAG, "check1 : false");
 	return check != null ? true : false;
 }
 private void copyDB() throws IOException {
