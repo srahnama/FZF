@@ -13,14 +13,14 @@ import static android.content.ContentValues.TAG;
  * Created by mrs on 10/6/16.
  */
 
-public class SQLController {
+public class SQLController  {
     private DBHelper dbHelper;
     private Context ourcontext;
     private SQLiteDatabase database;
 
     public SQLController(Context c) {
 
-        ourcontext = c;
+        this.ourcontext = c;
 
     }
     public SQLController open() throws SQLException {
@@ -29,7 +29,7 @@ public class SQLController {
         dbHelper.checkDB();
 
 
-        database = dbHelper.getWritableDatabase();
+        database = dbHelper.getReadableDatabase();
         return this;
 
     }
@@ -40,8 +40,15 @@ public class SQLController {
 
     public Cursor fetch() {
         String[] columns = new String[] { DBHelper._ID,DBHelper._ENword, DBHelper._FAVORITE,DBHelper._SYNON,DBHelper._PRONUN, DBHelper._FAword,DBHelper._CODING,DBHelper._EXAMPLE,DBHelper._EXMEAN };
-        Cursor cursor = database.query(DBHelper.TABLE_NAME, columns, null,
-                null, null, null, null);
+        Cursor cursor = database.query(DBHelper.TABLE_NAME, columns, null,null, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+    public Cursor _fetch(int lesson) {
+        String[] columns = new String[] { DBHelper._ID,DBHelper._ENword, DBHelper._FAVORITE,DBHelper._SYNON,DBHelper._PRONUN, DBHelper._FAword,DBHelper._CODING,DBHelper._EXAMPLE,DBHelper._EXMEAN };
+        Cursor cursor = database.query(DBHelper.TABLE_NAME, columns, null,null, null, null,null, (lesson*12)+", "+(lesson+1)*12);
         if (cursor != null) {
             cursor.moveToFirst();
         }

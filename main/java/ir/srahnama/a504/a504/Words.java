@@ -1,6 +1,7 @@
 package ir.srahnama.a504.a504;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.WorkSource;
 import android.support.design.widget.FloatingActionButton;
@@ -23,9 +24,11 @@ import android.widget.Toast;
 public class Words extends FragmentActivity {
     private String _Lesson;
 
-    private static final int NUM_PAGES = 5;
+
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
+    private Cursor cu;
+    private static final int NUM_PAGES = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +36,7 @@ public class Words extends FragmentActivity {
         setContentView(R.layout.activity_words);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         Bundle extras = getIntent().getExtras();
         _Lesson= extras.getString("lesson");
@@ -49,6 +45,9 @@ public class Words extends FragmentActivity {
 
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
+        SQLController SQLC = new SQLController(this);
+        SQLC.open();
+        cu = SQLC._fetch(Integer.parseInt(_Lesson));
 
     }
 
@@ -71,6 +70,7 @@ public class Words extends FragmentActivity {
            // return new ScreenSlidePageFragment();
             ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
             fragment.setText(position+"");
+            fragment.setCursor(cu);
             fragment.setLesson(_Lesson);
             return fragment;
         }

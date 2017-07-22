@@ -23,6 +23,10 @@ public class ScreenSlidePageFragment extends Fragment {
 
         this.text=text;
     }
+    public void setCursor(Cursor c){
+
+        this.cu=c;
+    }
     private String _Lesson;
     public void setLesson(String text){
 
@@ -31,11 +35,11 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_screen_slide_page,container, false);
-        SQLController SQLC = new SQLController(ourcontext);
-        SQLC.open();
-        cu = SQLC.fetch();
 
-        ((TextView)rootView.findViewById(R.id.tv1)).setText(cu.getColumnName(1));
+
+        cu.moveToPosition(Integer.parseInt(text));
+        String str1 = cu.getString(1);
+        ((TextView)rootView.findViewById(R.id.tv1)).setText( str1.substring(0, 1).toUpperCase()+str1.substring(1));
 
         return rootView;
     }

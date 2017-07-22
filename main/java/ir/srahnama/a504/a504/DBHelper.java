@@ -28,15 +28,15 @@ public static final String TABLE_NAME = "words";
 
 // Table columns
 	public static final String _ID = "id";
-	public static final String _ENword = "title";
-	public static final String _FAword = "text";
+	public static final String _ENword = "ENword";
+	public static final String _FAword = "FAword";
 	public static final String _READ = "read";
 	public static final String _FAVORITE = "favorite";
 	public static final String _CODING = "coding";
 	public static final String _SYNON= "synon";
 	public static final String _PRONUN= "pronun";
-	public static final String _EXAMPLE = "example";
-	public static final String _EXMEAN = "exmean";
+	public static final String _EXAMPLE = "Example";
+	public static final String _EXMEAN = "Exmean";
 
 //public static final String TODO_SUBJECT = "subject";
 //public static final String TODO_DESC = "description";
